@@ -29,7 +29,6 @@ self.addEventListener('install', function (e) {
                 return cache.addAll(FILES_TO_CACHE);
             })
     );
-    self.skipWaiting();
 })
 
 // Activate Service Worker and remove old data from the cache
@@ -52,13 +51,11 @@ self.addEventListener('activate', function (e) {
             );
         })
     );
-
-    self.clients.claim();
 });
 
 // Respond with cached resources
 self.addEventListener('fetch', function (e) {
-    if (e.request.url.includes('/api/')) {
+    if (e.request.url.includes('/api/')) { // for api calls
         e.respondWith(
             caches
                 .open(DATA_CACHE_NAME)
@@ -84,15 +81,8 @@ self.addEventListener('fetch', function (e) {
     }
 
     e.respondWith(
-        fetch(e.request).catch(function () {
-            return caches.match(e.request).then(function (response) {
-                if (response) {
-                    return response;
-                } else if (e.request.headers.get('accept').includes('text/html')) {
-                    // return the cached home page for all requests for html pages
-                    return caches.match('/');
-                }
-            });
+        caches.match(e.request).then(function (request) {
+          return request || fetch(e.request)
         })
     );
 });

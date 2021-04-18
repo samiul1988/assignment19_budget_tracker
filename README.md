@@ -1,7 +1,7 @@
-## Assignment 18: Budget Tracker
+## Assignment 19: Budget Tracker
 ---
 ### Topic
-Progressive WEb Application (PWA)
+Progressive Web Application (PWA) - Service Worker, IndexedDB, Web Manifest
 
 ### User Story (Obtained from the assignment description)
 
@@ -23,18 +23,14 @@ THEN the deposits or expenses added while they were offline are added to their t
 
 ## My Actions and Notes
 
-* The project was developed from scratch.
+* The project was developed from a starter codebase provided at the assignment description page.
 * Basic considerations were as follows:
-    * Following packages were used: ```express-handlebars```, ```mysql2```, ```sequelize```, ```dotenv```, ```bcrypt```, ```express-session``` and  ```connect-session-sequelize```
-    * Application's folder structure follows MVC paradigm
-    * Application was deployed to Heroku
-    * For each model, I attempted to create all CRUD apis, some of which return json as response, and some were used in homepage and dashboard page routes to render appropriate views
-    * If the authenticated user is idle for 10 mins, then he/she is automatically signed out and returned to homepage
-    * I also set the session cookie to be expired in 5 hours
-    * I added features so that if the user is logged in, then he/she can delete his/her own comments from any post 
+    * The application includes a service worker, a web manifest and indexedDB functionality
+    * If the user adds a transaction while offline, the transaction is saved to indexedDB database, but the display (table, chart and total) does not get updated until the app is back online 
+    * Application was deployed to Heroku 
 
 ### Demo Run
-![Demo Run](./assets/images/assignment19_demo.gif)
+![Demo Run](./public/images/assignment19_demo.gif)
 
 ### Link of Deployed Application
-[Heroku App Link](https://assignment19-tech-blog.herokuapp.com/)
+[Heroku App Link](https://assignment19-budget-tracker.herokuapp.com/)
